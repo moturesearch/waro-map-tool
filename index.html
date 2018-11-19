@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-search.css">
+        <style>
+        #map {
+            width: 769px;
+            height: 716px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-search.js"></script>
+        <script src="data/MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1.js"></script>
+        <script src="data/MoriownedlikelyETSbutnotECFPEligibleLand_2.js"></script>
+        <script src="data/MoriownedlikelyETSandECFPEligibleLand_3.js"></script>
+        <script src="data/Moriownedland_4.js"></script>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 1
+              });
+            }
+        }
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-38.009309190936726,177.9280297485339],[-37.496563058871885,178.6204422170116]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var overlay_Basemap_0 = L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0
+        });
+        overlay_Basemap_0.addTo(map);
+        map.addLayer(overlay_Basemap_0);
+        function pop_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Block ID</strong><br />' + (feature.properties['BLOCK_ID'] !== null ? Autolinker.link(String(feature.properties['BLOCK_ID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Block Name</strong><br />' + (feature.properties['BLOCK_NAME'] !== null ? Autolinker.link(String(feature.properties['BLOCK_NAME'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Land Court URL</strong><br />' + (feature.properties['MLOL_URI'] !== null ? Autolinker.link(String(feature.properties['MLOL_URI'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Likely Ineligible Land (ha)</strong><br />' + (feature.properties['Inelig2'] !== null ? Autolinker.link(String(feature.properties['Inelig2'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1_0() {
+            return {
+                pane: 'pane_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(124,161,50,1.0)',
+            }
+        }
+        map.createPane('pane_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1');
+        map.getPane('pane_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1').style.zIndex = 401;
+        map.getPane('pane_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1').style['mix-blend-mode'] = 'normal';
+        var layer_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1 = new L.geoJson(json_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1, {
+            attribution: '',
+            pane: 'pane_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1',
+            onEachFeature: pop_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1,
+            style: style_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1_0,
+        });
+        bounds_group.addLayer(layer_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1);
+        map.addLayer(layer_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1);
+        function pop_MoriownedlikelyETSbutnotECFPEligibleLand_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Block ID</strong><br />' + (feature.properties['BLOCK_ID'] !== null ? Autolinker.link(String(feature.properties['BLOCK_ID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Block Name</strong><br />' + (feature.properties['BLOCK_NAME'] !== null ? Autolinker.link(String(feature.properties['BLOCK_NAME'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Land Court URL</strong><br />' + (feature.properties['MLOL_URI'] !== null ? Autolinker.link(String(feature.properties['MLOL_URI'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Likely ETS but not ECFP Eligible Land (ha)</strong><br />' + (feature.properties['ETSArea'] !== null ? Autolinker.link(String(feature.properties['ETSArea'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MoriownedlikelyETSbutnotECFPEligibleLand_2_0() {
+            return {
+                pane: 'pane_MoriownedlikelyETSbutnotECFPEligibleLand_2',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,191,72,1.0)',
+            }
+        }
+        map.createPane('pane_MoriownedlikelyETSbutnotECFPEligibleLand_2');
+        map.getPane('pane_MoriownedlikelyETSbutnotECFPEligibleLand_2').style.zIndex = 402;
+        map.getPane('pane_MoriownedlikelyETSbutnotECFPEligibleLand_2').style['mix-blend-mode'] = 'normal';
+        var layer_MoriownedlikelyETSbutnotECFPEligibleLand_2 = new L.geoJson(json_MoriownedlikelyETSbutnotECFPEligibleLand_2, {
+            attribution: '',
+            pane: 'pane_MoriownedlikelyETSbutnotECFPEligibleLand_2',
+            onEachFeature: pop_MoriownedlikelyETSbutnotECFPEligibleLand_2,
+            style: style_MoriownedlikelyETSbutnotECFPEligibleLand_2_0,
+        });
+        bounds_group.addLayer(layer_MoriownedlikelyETSbutnotECFPEligibleLand_2);
+        map.addLayer(layer_MoriownedlikelyETSbutnotECFPEligibleLand_2);
+        function pop_MoriownedlikelyETSandECFPEligibleLand_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Block ID</strong><br />' + (feature.properties['BLOCK_ID'] !== null ? Autolinker.link(String(feature.properties['BLOCK_ID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Block Name</strong><br />' + (feature.properties['BLOCK_NAME'] !== null ? Autolinker.link(String(feature.properties['BLOCK_NAME'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Land Court URL</strong><br />' + (feature.properties['MLOL_URI'] !== null ? Autolinker.link(String(feature.properties['MLOL_URI'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Likely ETS and ECFP Eligible Land (ha)</strong><br />' + (feature.properties['ECFPArea'] !== null ? Autolinker.link(String(feature.properties['ECFPArea'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MoriownedlikelyETSandECFPEligibleLand_3_0() {
+            return {
+                pane: 'pane_MoriownedlikelyETSandECFPEligibleLand_3',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,95,14,1.0)',
+            }
+        }
+        map.createPane('pane_MoriownedlikelyETSandECFPEligibleLand_3');
+        map.getPane('pane_MoriownedlikelyETSandECFPEligibleLand_3').style.zIndex = 403;
+        map.getPane('pane_MoriownedlikelyETSandECFPEligibleLand_3').style['mix-blend-mode'] = 'normal';
+        var layer_MoriownedlikelyETSandECFPEligibleLand_3 = new L.geoJson(json_MoriownedlikelyETSandECFPEligibleLand_3, {
+            attribution: '',
+            pane: 'pane_MoriownedlikelyETSandECFPEligibleLand_3',
+            onEachFeature: pop_MoriownedlikelyETSandECFPEligibleLand_3,
+            style: style_MoriownedlikelyETSandECFPEligibleLand_3_0,
+        });
+        bounds_group.addLayer(layer_MoriownedlikelyETSandECFPEligibleLand_3);
+        map.addLayer(layer_MoriownedlikelyETSandECFPEligibleLand_3);
+        function pop_Moriownedland_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Block ID</strong><br />' + (feature.properties['BLOCK_ID'] !== null ? Autolinker.link(String(feature.properties['BLOCK_ID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Block Name</strong><br />' + (feature.properties['BLOCK_NAME'] !== null ? Autolinker.link(String(feature.properties['BLOCK_NAME'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Land Court URL</strong><br />' + (feature.properties['MLOL_URI'] !== null ? Autolinker.link(String(feature.properties['MLOL_URI'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Block Area (ha)</strong><br />' + (feature.properties['BLOCKsz'] !== null ? Autolinker.link(String(feature.properties['BLOCKsz'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Likely ETS and ECFP eligible land (ha)</strong><br />' + (feature.properties['ECFP2'] !== null ? Autolinker.link(String(feature.properties['ECFP2'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Likely ETS but not ECFP eligible land (ha)</strong><br />' + (feature.properties['ETS2'] !== null ? Autolinker.link(String(feature.properties['ETS2'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Likely Ineligible Land (ha)</strong><br />' + (feature.properties['Inelig2'] !== null ? Autolinker.link(String(feature.properties['Inelig2'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Moriownedland_4_0() {
+            return {
+                pane: 'pane_Moriownedland_4',
+                opacity: 1,
+                color: 'rgba(13,13,13,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Moriownedland_4');
+        map.getPane('pane_Moriownedland_4').style.zIndex = 404;
+        map.getPane('pane_Moriownedland_4').style['mix-blend-mode'] = 'normal';
+        var layer_Moriownedland_4 = new L.geoJson(json_Moriownedland_4, {
+            attribution: '',
+            pane: 'pane_Moriownedland_4',
+            onEachFeature: pop_Moriownedland_4,
+            style: style_Moriownedland_4_0,
+        });
+        bounds_group.addLayer(layer_Moriownedland_4);
+        map.addLayer(layer_Moriownedland_4);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Moriownedland_4.png" /> Māori-owned land': layer_Moriownedland_4,'<img src="legend/MoriownedlikelyETSandECFPEligibleLand_3.png" /> Māori-owned, likely ETS and ECFP Eligible Land': layer_MoriownedlikelyETSandECFPEligibleLand_3,'<img src="legend/MoriownedlikelyETSbutnotECFPEligibleLand_2.png" /> Māori-owned, likely ETS but not ECFP Eligible Land': layer_MoriownedlikelyETSbutnotECFPEligibleLand_2,'<img src="legend/MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1.png" /> Māori-owned land that is likely ineligible for either ECFP or ETS funding': layer_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1,"Basemap": overlay_Basemap_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        map.addControl(new L.Control.Search({
+            layer: layer_Moriownedland_4,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'BLOCK_NAME'}));
+        document.getElementsByClassName('search-button')[0].className +=
+         ' fa fa-binoculars';
+        </script>
+    </body>
+</html>
