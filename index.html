@@ -10,9 +10,9 @@
         <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
         <link rel="stylesheet" href="css/leaflet-search.css">
         <style>
-        #map {
-            width: 769px;
-            height: 716px;
+        html, body, #map {
+            width: 100%;
+            height: 100%;
         }
         </style>
         <title></title>
@@ -261,7 +261,8 @@
         bounds_group.addLayer(layer_Moriownedland_4);
         map.addLayer(layer_Moriownedland_4);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'<img src="legend/Moriownedland_4.png" /> Māori-owned land': layer_Moriownedland_4,'<img src="legend/MoriownedlikelyETSandECFPEligibleLand_3.png" /> Māori-owned, likely ETS and ECFP Eligible Land': layer_MoriownedlikelyETSandECFPEligibleLand_3,'<img src="legend/MoriownedlikelyETSbutnotECFPEligibleLand_2.png" /> Māori-owned, likely ETS but not ECFP Eligible Land': layer_MoriownedlikelyETSbutnotECFPEligibleLand_2,'<img src="legend/MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1.png" /> Māori-owned land that is likely ineligible for either ECFP or ETS funding': layer_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1,"Basemap": overlay_Basemap_0,},{collapsed:false}).addTo(map);
+        var layer_control = L.control.layers(baseMaps,{'<img src="legend/Moriownedland_4.png" /> Māori-owned land': layer_Moriownedland_4,'<img src="legend/MoriownedlikelyETSandECFPEligibleLand_3.png" /> Māori-owned, likely ETS and ECFP Eligible Land': layer_MoriownedlikelyETSandECFPEligibleLand_3,'<img src="legend/MoriownedlikelyETSbutnotECFPEligibleLand_2.png" /> Māori-owned, likely ETS but not ECFP Eligible Land': layer_MoriownedlikelyETSbutnotECFPEligibleLand_2,'<img src="legend/MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1.png" /> Māori-owned land that is likely ineligible for either ECFP or ETS funding': layer_MoriownedlandthatislikelyineligibleforeitherECFPorETSfunding_1,"Basemap": overlay_Basemap_0,},{collapsed:false},{position:'bottomleft'});
+		layer_control.addTo(map);
         setBounds();
         map.addControl(new L.Control.Search({
             layer: layer_Moriownedland_4,
